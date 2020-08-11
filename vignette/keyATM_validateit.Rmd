@@ -1,0 +1,90 @@
+---
+title: "keyATM with validateIT"
+author: "Tomoya Sasaki"
+date: "8/10/2020"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, message = FALSE}
+library(keyATM)
+library(quanteda)
+library(magrittr)
+library(stm)
+library(validateIt) # make sure to compile from the local folder
+```
+
+
+# Prepare documents
+* From the example in the website
+
+```{r}
+data(data_corpus_inaugural, package = "quanteda")
+
+data_tokens <- tokens(data_corpus_inaugural,
+                      remove_numbers = TRUE,
+                      remove_punct = TRUE,
+                      remove_symbols = TRUE,
+                      remove_separators = TRUE,
+                      remove_url = TRUE) %>%
+                 tokens_tolower() %>%
+                 tokens_remove(c(stopwords("english"),
+                               "may", "shall", "can",
+                               "must", "upon", "with", "without")) %>%
+                 tokens_select(min_nchar = 3)
+data_dfm <- dfm(data_tokens) %>%
+              dfm_trim(min_termfreq = 5, min_docfreq = 2)
+```
+
+# Pre-process for validateIt
+
+```{r}
+heldout <- make.heldout(data_dfm, seed = 123)
+```
+
+
+# keyATM
+```{r, message = FALSE}
+keyATM_docs <- keyATM_read(texts = data_dfm)
+# keywords
+keywords <- list(Government     = c("laws", "law", "executive"),
+                 Congress       = c("congress", "party"),
+                 Peace          = c("peace", "world", "freedom"),
+                 Constitution   = c("constitution", "rights"),
+                 ForeignAffairs = c("foreign", "war"))
+
+# run
+out <- keyATM(docs              = keyATM_docs,    # text input
+              no_keyword_topics = 5,              # number of topics without keywords
+              keywords          = keywords,       # keywords
+              model             = "base",         # select the model
+              options           = list(seed = 250, iterations = 100))
+```
+
+# stm
+```{r, message = FALSE}
+out2 <- stm(documents = heldout$documents, heldout$vocab, K = 10, max.em.its = 50, seed = 250)
+```
+
+```{r}
+out_keyatm <- combMass(out, beta = out$phi, vocab = out$vocab)
+
+out_stm <- combMass(out2)
+```
+
+```{r}
+str(out_keyatm); str(out_stm)
+```
+
+
+```{r, eval=FALSE}
+T8WSItasks <- validateTopic(type = "T8WSI", n = 500,
+                            text = stmPrep$meta$post_text[-heldout$missing$index], vocab = newMass[[1]],
+                            beta = newMass[[2]],
+                            theta = out2$theta[-heldout$missing$index,],
+                            thres = 20)
+```
+
