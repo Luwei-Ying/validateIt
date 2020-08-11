@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r, include = FALSE}
-aws_key <- read.csv("/Users/tomoyasasaki/rootkey.csv")
+aws_key <- read.table("/Users/tomoyasasaki/rootkey.csv", sep = ",")
 # aws_key <- read.csv("/Users/tomoyasasaki/new_user_credentials.csv")
 ```
 
@@ -94,6 +94,8 @@ out2 <- stm(documents = heldout$documents, heldout$vocab, K = 10, max.em.its = 5
 
 ```{r}
 library(pyMTurkR)
+Sys.setenv(AWS_ACCESS_KEY_ID = aws_key[1, 2])
+Sys.setenv(AWS_SECRET_ACCESS_KEY = aws_key[2, 2])
 options(pyMTurkR.sandbox = F) # change sandbox = F when ready to run on MTurk 
 AccountBalance()
 ```
