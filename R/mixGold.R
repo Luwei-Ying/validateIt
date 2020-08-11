@@ -2,6 +2,7 @@
 #'
 #' @param tasks All tasks need to be validated
 #' @param golds Gold standard tasks with the same structure
+#' @export
 
 mixGold <- function(tasks, golds){
   if (nrow(tasks)/nrow(golds) != round(nrow(tasks)/nrow(golds))){

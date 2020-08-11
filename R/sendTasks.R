@@ -14,6 +14,7 @@
 #' @param batch_annotation add if needed
 #'
 #' @import pyMTurkR
+#' @export
 
 sendTasks <- function(hit_type = NULL,
                       hit_layout = NULL,
