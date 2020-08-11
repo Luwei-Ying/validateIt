@@ -28,6 +28,7 @@ combMass <- function(mod = NULL, vocab = NULL, beta = NULL){
   # newbeta <- t(rowsum(t(rawbeta), colnames(rawbeta)))
   newvocab <- matrix(NA, nrow = nrow(rawbeta), ncol = length(unique(stemmed_vocab)))
   newbeta <- matrix(NA, nrow = nrow(rawbeta), ncol = length(unique(stemmed_vocab)))
+  
   for (i in 1:nrow(rawbeta)){
     mapping <- cbind.data.frame(vocab, stemmed_vocab, rawbeta[i,], stringsAsFactors = F)
     colnames(mapping)[3] <- "prob"

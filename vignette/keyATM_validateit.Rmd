@@ -9,6 +9,12 @@ output: pdf_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r, include = FALSE}
+aws_key <- read.csv("/Users/tomoyasasaki/rootkey.csv")
+# aws_key <- read.csv("/Users/tomoyasasaki/new_user_credentials.csv")
+```
+
+
 ```{r, message = FALSE}
 library(keyATM)
 library(quanteda)
@@ -45,10 +51,23 @@ data_dfm <- dfm(data_tokens) %>%
 heldout <- make.heldout(data_dfm, seed = 123)
 ```
 
-
 # keyATM
 ```{r, message = FALSE}
-keyATM_docs <- keyATM_read(texts = data_dfm)
+# convert heldout object to keyATM object
+df_heldout <- matrix(0, nrow = length(heldout$documents), ncol = length(heldout$vocab))
+row.names(df_heldout) <- names(heldout$documents)
+colnames(df_heldout) <- heldout$vocab
+
+for (i in 1:length(heldout$documents)) {
+  obj <- heldout$documents[[i]]
+  for (j in 1:ncol(obj)) {
+    id <- obj[1, j]
+    num <- obj[2, j]
+    df_heldout[i, id] <- df_heldout[i, id] + num
+  }
+}
+
+keyATM_docs <- keyATM_read(texts = as.dfm(df_heldout))
 # keywords
 keywords <- list(Government     = c("laws", "law", "executive"),
                  Congress       = c("congress", "party"),
@@ -66,12 +85,42 @@ out <- keyATM(docs              = keyATM_docs,    # text input
 
 # stm
 ```{r, message = FALSE}
-out2 <- stm(documents = heldout$documents, heldout$vocab, K = 10, max.em.its = 50, seed = 250)
+out2 <- stm(documents = heldout$documents, heldout$vocab, K = 10, max.em.its = 50, seed = 250, verbose = FALSE)
+```
+
+# Create a screen
+* This link is helpful \url{https://blog.mturk.com/tutorial-setting-up-your-aws-account-to-make-use-of-mturks-api-4e405b8fc8cb}
+* In addition to the step described in the blog, you also need to complete "Register for the MTurk Developer Sandbox"
+
+```{r}
+library(pyMTurkR)
+Sys.setenv(AWS_ACCESS_KEY_ID = "AKIAJCPRPLWZMMZUK3FQ")
+Sys.setenv(AWS_SECRET_ACCESS_KEY = "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")
+options(pyMTurkR.sandbox = F) # change sandbox = F when ready to run on MTurk 
+AccountBalance()
 ```
 
 ```{r}
-out_keyatm <- combMass(out, beta = out$phi, vocab = out$vocab)
+TestQuestions <- paste0(readLines("T8WSIQuestion.xml", # you may need to add a file path 
+                                  warn = FALSE), collapse = "")
+TestKey <- paste0(readLines("T8WSIAnswer.xml",
+                            warn = FALSE),
+                  collapse = "")
+```
 
+```{r}
+T8WSIQual <- CreateQualificationType(name = "top eight word set intrusion qualification", # name of the qualification
+                                     description =  'Qualification for "top eight word set intrusion" tasks.' , # description of the qualification
+                                     status = "Active", # allows qual to remain active for users
+                                     test = TestQuestions, # pass questions for qual test
+                                     test.duration = 60 * 60, # test duration, in seconds
+                                     retry.delay = NULL, # how long until worker can retry test; NULL means never
+                                     answerkey = TestKey)
+```
+
+
+```{r}
+out_keyatm <- combMass(out, beta = out$phi, vocab = out$vocab)
 out_stm <- combMass(out2)
 ```
 
