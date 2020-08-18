@@ -74,7 +74,6 @@ keywords <- list(Government     = c("laws", "law", "executive"),
                  Peace          = c("peace", "world", "freedom"),
                  Constitution   = c("constitution", "rights"),
                  ForeignAffairs = c("foreign", "war"))
-
 # run
 out <- keyATM(docs              = keyATM_docs,    # text input
               no_keyword_topics = 5,              # number of topics without keywords
@@ -85,7 +84,7 @@ out <- keyATM(docs              = keyATM_docs,    # text input
 
 # stm
 ```{r, message = FALSE}
-out2 <- stm(documents = heldout$documents, heldout$vocab, K = 10, max.em.its = 50, seed = 250, verbose = FALSE)
+# out2 <- stm(documents = heldout$documents, heldout$vocab, K = 10, max.em.its = 50, seed = 250, verbose = FALSE)
 ```
 
 # Create a screen
@@ -108,9 +107,9 @@ TestKey <- paste0(readLines("T8WSIAnswer.xml",
                   collapse = "")
 ```
 
-```{r}
-T8WSIQual <- CreateQualificationType(name = "top eight word set intrusion qualification", # name of the qualification
-                                     description =  'Qualification for "top eight word set intrusion" tasks.' , # description of the qualification
+```{r, eval = FALSE}
+T8WSIQual <- CreateQualificationType(name = "top eight word set intrusion qualification 2", # name of the qualification
+                                     description =  'Qualification for "top eight word set intrusion" tasks 2.' , # description of the qualification
                                      status = "Active", # allows qual to remain active for users
                                      test = TestQuestions, # pass questions for qual test
                                      test.duration = 60 * 60, # test duration, in seconds
@@ -121,19 +120,21 @@ T8WSIQual <- CreateQualificationType(name = "top eight word set intrusion qualif
 
 ```{r}
 out_keyatm <- combMass(out, beta = out$phi, vocab = out$vocab)
-out_stm <- combMass(out2)
+# out_stm <- combMass(out2)
 ```
 
+
 ```{r}
-str(out_keyatm); str(out_stm)
+T8WSItasks <- validateTopic(type = "T8WSI", 
+                            n = 500,
+                            text = data_corpus_inaugural[-heldout$missing$index],
+                            vocab = out_keyatm[[1]],
+                            beta = out_keyatm[[2]],
+                            theta = out$theta[-heldout$missing$index, ],
+                            thres = 20)
 ```
 
 
 ```{r, eval=FALSE}
-T8WSItasks <- validateTopic(type = "T8WSI", n = 500,
-                            text = stmPrep$meta$post_text[-heldout$missing$index], vocab = newMass[[1]],
-                            beta = newMass[[2]],
-                            theta = out2$theta[-heldout$missing$index,],
-                            thres = 20)
 ```
 

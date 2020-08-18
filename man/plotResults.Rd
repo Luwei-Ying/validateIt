@@ -4,7 +4,7 @@
 \alias{plotResults}
 \title{Plot results}
 \usage{
-plotResults(path, x, n, taskname)
+plotResults(path, x, n, taskname, ...)
 }
 \arguments{
 \item{path}{path to store the plot}

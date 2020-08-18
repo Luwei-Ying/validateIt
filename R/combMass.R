@@ -13,7 +13,7 @@
 #' @export 
 #' 
 combMass <- function(mod = NULL, vocab = NULL, beta = NULL){
-  if(class(mod) == "STM"){
+  if("STM" %in% class(mod)){
     vocab <- mod$vocab
     rawbeta <- exp(mod$beta$logbeta[[1]])
   } else {

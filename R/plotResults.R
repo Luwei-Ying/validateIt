@@ -7,6 +7,8 @@
 #' @param x a vector of counts of successes; could be obtained from getResults()
 #' @param n a vector of counts of trials
 #' @param taskname the name of the task for labeling, e.g., Word Intrusion, Optimal Label.
+#' 
+#' @export
 
 plotResults <- function(path, x, n, taskname, ...){
   pdf(path, width = 3, height = 7)
