@@ -8,7 +8,7 @@
 #' @param n a vector of counts of trials
 #' @param taskname the name of the task for labeling, e.g., Word Intrusion, Optimal Label.
 
-plotResults <- function(path, x, n, taskname){
+plotResults <- function(path, x, n, taskname, ...){
   pdf(path, width = 3, height = 7)
   par(mgp = c(1.5, 0, 0), mar = c(2, 3, .7, .7))
   plot(NULL,
@@ -18,7 +18,7 @@ plotResults <- function(path, x, n, taskname){
        ylab = "Proportion Correct",
        xlab = NA,
        cex.lab = 1.2,
-       axes = F)
+       axes = F, ...)
   axis(side = 2, at = seq(0, 1, by = 0.2), col.ticks = NA, cex.axis = 1.2)
   axis(side = 1, at = 1,
        labels = taskname, 
