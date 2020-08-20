@@ -1,8 +1,10 @@
-#' Evaluate results
+#' Check Agreement Rate between Identical Trails
 #'
 #' @details
-#' Evaluate worker performance by gold-standard HITs;
-#' Return the accuracy rate (proportion correct) for a specified batch
+#' Evaluate workers' performance by agreement rate between identical trails
+#' (Notice that this means the two input, results1 and results2, must be identical.);
+#' Return the agreement rate, i.e.,
+#'  workers from the two trials get the task either right or wrong simultaneously
 #'
 #' @param results results of human choice; outputs from getResults()
 #' @param key the local task record; outputs form recordTasks()
@@ -10,7 +12,7 @@
 #' "T8WSI" (top 8 word set intrusion), "R4WSI" (random 4 word set intrusion),
 #' "LI" (Label Intrusion), and "OL" (Optimal Label)
 
-evalResults <- function(results, key, type = NULL){
+checkAgree <- function(results, key, type = NULL){
   if(sum(!(key[[1]]$id %in% results$local_task_id)) != 0){
     key[[2]] <- key[[2]][key[[1]]$id %in% results$local_task_id,]
     key[[1]] <- key[[1]][key[[1]]$id %in% results$local_task_id,]
