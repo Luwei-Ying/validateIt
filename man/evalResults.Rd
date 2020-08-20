@@ -19,6 +19,6 @@ evalResults(results, key, type = NULL)
 Evaluate results
 }
 \details{
-Evaludate worker performance by gold-standard HITs;
+Evaluate worker performance by gold-standard HITs;
 Return the accuracy rate (proportion correct) for a specified batch
 }
