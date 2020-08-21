@@ -1,7 +1,7 @@
 #' Evaluate results
 #'
 #' @details
-#' Evaludate worker performance by gold-standard HITs;
+#' Evaluate worker performance by gold-standard HITs;
 #' Return the accuracy rate (proportion correct) for a specified batch
 #'
 #' @param results results of human choice; outputs from getResults()
