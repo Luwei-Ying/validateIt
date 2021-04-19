@@ -9,6 +9,7 @@
 #' @param type Task structures to be specified. Must be one of "WI" (word intrusion),
 #' "T8WSI" (top 8 word set intrusion), "R4WSI" (random 4 word set intrusion),
 #' "LI" (Label Intrusion), and "OL" (Optimal Label)
+#'
 #' @export
 
 evalResults <- function(results, key, type = NULL){
