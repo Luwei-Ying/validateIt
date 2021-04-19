@@ -14,6 +14,8 @@
 #' @param theta A matrix of topic proportions. Each row represents a document and each
 #' clums represents a topic. Must be specified if task = "T8WSI" or "R4WSI".
 #' @param thres the threshold to draw words from, default to top 50 words.
+#' 
+#' @export
 
 validateTopic <- function(type, n, text = NULL, vocab, beta, theta = NULL, thres = 20){
   if (type == "WI"){

@@ -12,6 +12,8 @@
 #' @param sandbox sanbox setting
 #'
 #' @import pyMTurkR
+#' 
+#' @export
 
 getResults <- function(batch_id = "unspecified",
                        hit_ids,

@@ -19,6 +19,8 @@
 #' @param labels.add Labels from other broad catagories. Default to NULL. Users could 
 #' specify them to evaluate how well different broad categories are distinguished from
 #' one another.
+#' 
+#' @export
 
 validateLabel <- function(type, n, text.predict = NULL, text.name = "text",
                           top1.name = "top1", top2.name = "top2", top3.name = "top3",

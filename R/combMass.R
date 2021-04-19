@@ -10,6 +10,9 @@
 #' topic and each column represents a word. Note this should not be in the logged form.
 #'
 #' @import tm
+#' 
+#' @export
+
 combMass <- function(mod = NULL, vocab = NULL, beta = NULL){
   if(class(mod) == "STM"){
     vocab <- mod$vocab

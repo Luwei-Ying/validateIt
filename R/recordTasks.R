@@ -6,6 +6,8 @@
 #' @param type one of WI, T8WSI, R4WSI
 #' @param tasks outputs from validateTopic(), validateLabel(), or mixGold() if users mix in gold-standard HITs
 #' @param path path to record the tasks (with meta-information)
+#' 
+#' @export
 
 recordTasks <- function(type, tasks, path){
   if(type == "WI"){
