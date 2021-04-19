@@ -1,6 +1,6 @@
 Package: validateIt
 Title: Validating Topic Coherence and Topic Labels
-Version: 0.2.0
+Version: 0.2.01
 Authors@R: c(
 	person(given = "Luwei",
            family = "Ying",
