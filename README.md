@@ -11,12 +11,12 @@ The package is currently not available on CRAN. You can install the most recent 
 if(!require(devtools)) install.packages("devtools")
 ```  
 
-Then you'll need to install the dependency, "pyMTurkR". Be sure to follow the detailed instructions here \url{github.com/cloudyr/pyMTurkR} if you need to interact with Mturk. 
+Then you'll need to install the dependency, "pyMTurkR", using the function `install_github`. If you need to interact with Mturk, be sure to follow the detailed instructions here: github.com/cloudyr/pyMTurkR
 ```
-devtools::install_github("Luwei-Ying/validateIt", dependencies=TRUE)
+devtools::install_github("cloudyr/pyMTurkR")
 ```
 
-Now you can load our package and use the function `install_github`
+Now you can install our package
 
 ```
 devtools::install_github("Luwei-Ying/validateIt", dependencies=TRUE)
