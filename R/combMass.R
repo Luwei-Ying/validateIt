@@ -10,11 +10,10 @@
 #' topic and each column represents a word. Note this should not be in the logged form.
 #'
 #' @import tm
-#' 
-#' @export
+#' @export  
 
 combMass <- function(mod = NULL, vocab = NULL, beta = NULL){
-  if(class(mod) == "STM"){
+  if("STM" %in% class(mod)){
     vocab <- mod$vocab
     rawbeta <- exp(mod$beta$logbeta[[1]])
   } else {
@@ -29,6 +28,7 @@ combMass <- function(mod = NULL, vocab = NULL, beta = NULL){
   # newbeta <- t(rowsum(t(rawbeta), colnames(rawbeta)))
   newvocab <- matrix(NA, nrow = nrow(rawbeta), ncol = length(unique(stemmed_vocab)))
   newbeta <- matrix(NA, nrow = nrow(rawbeta), ncol = length(unique(stemmed_vocab)))
+  
   for (i in 1:nrow(rawbeta)){
     mapping <- cbind.data.frame(vocab, stemmed_vocab, rawbeta[i,], stringsAsFactors = F)
     colnames(mapping)[3] <- "prob"
