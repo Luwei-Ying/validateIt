@@ -1,4 +1,4 @@
-load("../../data/modtest.rda")
+load("../testdata/modtest.rda")
 
 combMass_slow <- function(mod = NULL){
   vocab <- mod$vocab

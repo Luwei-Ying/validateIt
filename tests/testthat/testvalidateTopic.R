@@ -1,6 +1,7 @@
-load("../../data/masstest.rda")
-load("../../data/heldouttest.rda")
-load("../../data/stmPreptest.rda")
+load("../testdata/masstest.rda")
+load("../testdata/heldouttest.rda")
+load("../testdata/stmPreptest.rda")
+load("../testdata/modtest.rda")
 
 test_that("Test class",{
   WItask <- validateTopic(type = "WI", n = 5, vocab = masstest[[1]], beta = masstest[[2]])

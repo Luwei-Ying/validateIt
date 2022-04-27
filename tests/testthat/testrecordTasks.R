@@ -1,13 +1,13 @@
-load("../../data/allR4WSItasktest.rda")
+load("../testdata/allR4WSItasktest.rda")
 
 record <- recordTasks(type = "R4WSI0",
                       tasks = allR4WSItasktest,
-                      path = "../../data/recordtest.rda")
+                      path = "../testdata/allR4WSItasktest.rda")
 
 test_that("Record exists in path",{
-  expect_true(file.exists("../../data/recordtest.rda"))
+  expect_true(file.exists("../testdata/allR4WSItasktest.rda"))
   # file created within 1 min
-  expect_true(Sys.time() - file.info("../../data/recordtest.rda")$ctime < 5)
+  expect_true(Sys.time() - file.info("../testdata/allR4WSItasktest.rda")$ctime < 5)
 })
 
 test_that("Record is in the correct format",{

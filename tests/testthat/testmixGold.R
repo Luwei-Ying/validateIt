@@ -1,5 +1,6 @@
-load("../../data/R4WSItasktest.rda")
-load("../../data/goldR4WSItest.rda")
+load("../testdata/R4WSItasktest.rda")
+load("../testdata/goldR4WSItest.rda")
+load("../testdata/masstest.rda")
 
 test_that("Test mixGold",{
   allR4WSItasktest <- mixGold(tasks = R4WSItasktest, golds = goldR4WSItest)

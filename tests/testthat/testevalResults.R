@@ -1,5 +1,5 @@
-load("../../data/resultstest.rda")
-load("../../data/keypostedtest.rda")
+load("../testdata/resultstest.rda")
+load("../testdata/keypostedtest.rda")
 
 evaluations <- evalResults(results = resultstest,
                            key = keypostedtest,
