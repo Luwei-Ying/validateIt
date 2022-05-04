@@ -7,7 +7,7 @@ record <- recordTasks(type = "R4WSI0",
 test_that("Record exists in path",{
   expect_true(file.exists("../testdata/allR4WSItasktest.rda"))
   # file created within 1 min
-  expect_true(Sys.time() - file.info("../testdata/allR4WSItasktest.rda")$ctime < 5)
+  expect_true(Sys.time() - file.info("../testdata/allR4WSItasktest.rda")$ctime < 10)
 })
 
 test_that("Record is in the correct format",{
