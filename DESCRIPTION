@@ -2,9 +2,13 @@ Package: validateIt
 Title: Validating Topic Coherence and Topic Labels
 Version: 0.2.01
 Authors@R: c(
+  person(given = "Alex",
+           family = "Avery",
+           role = c("cre"),
+           email = "a.d.avery@wustl.edu", 
 	person(given = "Luwei",
            family = "Ying",
-           role = c("aut", "cre"),
+           role = c("aut"),
            email = "luwei.ying@wustl.edu",
            comment = c(ORCID = "0000-0001-7307-4834")),
     person(given = "Jacob",
