@@ -14,7 +14,7 @@ Authors@R: c(
            family = "Stewart",
            role = c("aut")))
 Description: validatIt creates crowd-sourcing tasks to validate topic coherence from unsupervised or semisupervised learning, as well as the topic labels specified by researchers. It provides easy access to the Amazon's Mechanical Turk (MTurk) API to post tasks and retrieve results.
-License: What license it uses
+License: GPL (>=3)
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.2
