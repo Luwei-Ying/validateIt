@@ -14,6 +14,8 @@ plotResults(path, x, n, taskname, ...)
 \item{n}{a vector of counts of trials}
 
 \item{taskname}{the name of the task for labeling, e.g., Word Intrusion, Optimal Label.}
+
+\item{...}{extra arguments}
 }
 \description{
 Plot results
