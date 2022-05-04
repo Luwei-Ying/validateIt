@@ -10,6 +10,7 @@
 #' topic and each column represents a word. Note this should not be in the logged form.
 #'
 #' @import tm
+#' @import stats
 #' 
 #' @export
 
@@ -32,8 +33,8 @@ combMass <- function(mod = NULL, vocab = NULL, beta = NULL){
   for (i in 1:nrow(rawbeta)){
     mapping <- cbind.data.frame(vocab, stemmed_vocab, rawbeta[i,], stringsAsFactors = F)
     colnames(mapping)[3] <- "prob"
-    maxtable <- aggregate(mapping$prob, by = list(mapping$stemmed_vocab), max)
-    sumtable <- aggregate(mapping$prob, by = list(mapping$stemmed_vocab), sum)
+    maxtable <- stats::aggregate(mapping$prob, by = list(mapping$stemmed_vocab), max)
+    sumtable <- stats::aggregate(mapping$prob, by = list(mapping$stemmed_vocab), sum)
     grouptable <- cbind.data.frame(maxtable, sumtable[,2])
     colnames(grouptable) <- c("stemmed_vocab", "prob", "sum.prob")
     mapping <- merge(mapping, grouptable,
