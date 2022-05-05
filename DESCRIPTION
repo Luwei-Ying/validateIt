@@ -26,6 +26,7 @@ Imports:
 	pyMTurkR,
 	stm,
 	tm,
+	methods,
 	ellipsis
 Suggests: 
     testthat

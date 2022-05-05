@@ -9,13 +9,14 @@
 #' @param beta A matrix of word probabilities for each topic. Each row represents a
 #' topic and each column represents a word. Note this should not be in the logged form.
 #'
+#' @import methods
 #' @import tm
 #' @import stats
 #' 
 #' @export
 
 combMass <- function(mod = NULL, vocab = NULL, beta = NULL){
-  if(class(mod) == "STM"){
+  if(methods::is(mod, "STM")){
     vocab <- mod$vocab
     rawbeta <- exp(mod$beta$logbeta[[1]])
   } else {
