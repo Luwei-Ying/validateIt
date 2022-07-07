@@ -1,3 +1,6 @@
+* This is a forked version of `validateIt`. This package allows to conduct additional validation tasks such as Label intrusion tasks (LI2 or LI4).
+
+
 ## validateIt: An R Package for Topic and Label Validation
 
 Authors: [Luwei Ying](http://luweiying.org), [Jacob Montgomery](https://pages.wustl.edu/montgomery) and [Brandon Stewart](http://brandonstewart.org)
